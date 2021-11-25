@@ -26,7 +26,7 @@ The article has a answer from sysadmin which say "don't worry, I made sure no on
 This article, with the challenge title, give us good informations to where to look to find the vulnerability : the XML-RPC API
 the XML-RPC API in Wordpress is an old API but still implemented by default in Wordpress which can be used to interact with the CMS via XML-based requests. The endpoint to reach this API in Wordpress CMS is /xmlrpc.php. It's better to disable this functionnality in general because it can be used to make amplified DDOS or Bruteforce.
 Let's work on http://web-vxslkw.inst.malicecyber.com/xmlrpc.php.
-There are example of requests we can use to interact with the api on the internet, by example we can list all available functions: 
+There are example of requests we can use to interact with the api on the internet, for example we can list all available functions: 
 
 <img src="../Images/11.png" width="900" />
 
@@ -35,8 +35,8 @@ There are not non-standart methods, maybe we could trigger an error by sending a
 <img src="../Images/12.png" width="900" />
 That's strange, we get an error message which indicate that the XML has not been properly parsed. With this response, we can conclude that the XML parsing has been modified and that the vulnerability is probably there ! Moreover, XML parsing vulnerability in web application are known vulnerabilities named XXE (XML External Entity) https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing
 
-It's possible to do various things with such vulnerabilities, by example, it's possible to read files on the remote server and even extract them to our machine.
-We can find help in many websites to find example attack and payloads, by example on https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection
+It's possible to do various things with such vulnerabilities, for example, it's possible to read files on the remote server and even extract them to our machine.
+We can find help in many websites to find example attack and payloads, for example on https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection
 
 After playing for a while whith various payload, I managed to find a way to read files on the target system :
 
