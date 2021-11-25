@@ -47,7 +47,7 @@ Note that files uploaded on the server are renamed with the date and an unique t
 
 So we can upload file and access them but we can't upload a php file in order to have code execution on the server. What if there is a flaw in the download API endpoint function ?
 After some time, I managed to exploit a Path Transversal vulnerability on the download endpoint to access any file on the server. The vulnerability was tough to find because it needed to double-url encode the path of the file, and climb a lot of steps back in the directory tree.
-By example to get to passwd :
+For example to get to passwd :
 ```http://instakilogram.chall.malicecyber.com/download/%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%2565%2574%2563%252f%2570%2561%2573%2573%2577%2564```
 
 <img src="../Images/6.png" width="900" />
@@ -100,7 +100,7 @@ We can see that when the endpoint /storeZip is called with a form : :
 
 This extraction method could be vulnerable, I looked on the Internet for a vulnerability in the Chumper Zipper package and found this post : https://security.snyk.io/vuln/SNYK-PHP-CHUMPERZIPPER-552162
 It appears that prior version 1.0.3, it was possible to extract the file to an other directory with a Path Transversal vulnerability via the name of one of the file in the archive.
-By example unzipping a file named ../var/www/file.txt, will trick the package and extract the file not in the /tmp directory, but in /var/www
+For example unzipping a file named ../var/www/file.txt, will trick the package and extract the file not in the /tmp directory, but in /var/www
 Maybe the package is not updated on the website ! We could try to create an archive which contains a php file with an evil filename to trick the zipper and extract it to a location we could access, like /var/www/html/public/images/post/
 
 I found an useful python tool which can craft this kind of archive: https://github.com/ptoomey3/evilarc
@@ -108,7 +108,7 @@ I put in the archive a simple php webshell with an evil name to path transversal
 <img src="../Images/8.png" width="1100" />
 We then upload the evil.zip archive to http://instakilogram.chall.malicecyber.com/storeZip
 
-Then we visit the path where our php webshell is supposed to have been extraxted: 
+Then we visit the path where our php webshell is supposed to have been extracted: 
 .... And we get a shell !!
 <img src="../Images/9.png" width="1100" />
 
